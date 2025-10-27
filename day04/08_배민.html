@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face{
+            font-family: Dongle;
+            src: url(../font/Dongle/Dongle-Bold.ttf);
+        }
+        body{
+            background-color: aquamarine;
+            font-family: Dongle;
+            text-align: center;
+        }
+        .container>header{
+            margin: 20px;
+        }
+        .container>header>h1{
+            font-size: 50px;
+        }
+        .containe>header>h2{
+            font-size: 30px;
+        }
+        
+        .container{
+            background-color: aquamarine;
+        }
+        .card1, .card2, .card3, .card4, .card5{
+            width: 400px;
+            height: 500px;
+            background-color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 0 auto;
+            overflow: hidden;
+            font-size: 15px;
+        }
+        .card>.img1{
+            width: 100%;
+            height: 50%;
+            background-image: url(../image/고기.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .card>.img2{
+            width: 100%;
+            height: 50%;
+            background-image: url(../image/냉면.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .card>.img3{
+            width: 100%;
+            height: 50%;
+            background-image: url(../image/만두.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .card>.img4{
+            width: 100%;
+            height: 50%;
+            background-image: url(../image/밥.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .card>.img5{
+            width: 100%;
+            height: 50%;
+            background-image: url(../image/쫄면.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .card>.des>.c{
+            color: blue;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>배달의 민족</h1>
+            <h2>넌 배달할 때가 제일 멋있어</h2>
+        </header>
+        <main>
+            <div class="card card1">
+                <div class="img1"></div>
+                <div class="des">
+                <h2>맛있는 고기</h2><br>
+                <p>배에 기름칠 하고 싶을 때는 고기!</p>
+                <p><del>19,000원(200g)</del>17,000원</p>
+                <p class="c">바로결제</p>
+                </div>
+            </div>
+            <br><br>
+            <div class="card card2">
+                <div class="img2"></div>
+                <div class="des">
+                <h2>시원한 냉면</h2><br>
+                <p>고기먹고 후식은 냉면!</p>
+                <p><del>12,000원</del>9,000원</p>
+                <p class="c">바로결제</p>
+                </div>
+            </div>
+            <br><br>
+            <div class="card card3">
+                <div class="img3"></div>
+                <div class="des">
+                <h2>뜨끈한 만두</h2><br>
+                <p>에피타이저로 만두!</p>
+                <p><del>6,000원(5조각)</del>5,000원</p>
+                <p class="c">바로결제</p>
+                </div>
+            </div>
+            <br><br>
+            <div class="card card4">
+                <div class="img4"></div>
+                <div class="des">
+                <h2>한국인은 밥</h2><br>
+                <p>한국인 밥상의 완성은 밥!</p>
+                <p>2,000원</p>
+                <p class="c">바로결제</p>
+                </div>
+            </div>
+            <br><br>
+            <div class="card card5">
+                <div class="img5"></div>
+                <div class="des">
+                <h2>매콤한 쫄면</h2><br>
+                <p>삼겹살하고 싸먹으면 최고!</p>
+                <p>8,000원</p>
+                <p class="c">바로결제</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

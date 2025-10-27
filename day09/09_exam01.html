@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        가위 바위 보 게임을 10번 하여 승률 출력
+    </h1>
+
+    <button type="button" id="btn">승률출력</button>
+    <h3>
+        10game의 승률은 <span id="result"></span>%입니다.
+    </h3>
+
+    <script>
+        // 가위바위보 게임
+        // com = random / player = random 으로 가위 바위 보 내는 방식
+        // 0 = 가위, 1 = 바위, 2 = 보
+        // 승률게산 ( 승 / (10-무))*100 소루 2자리까지 표현
+        // 콘솔에 출력 com / player (승/패/무)
+        const rcpArray = ["가위", "바위", "보"];
+        
+        function WinRate() {
+            let winCount = 0;
+            let loseCount = 0;
+            let drawCount = 0;
+        
+
+
+        for(let i=0; i<10; i++) {
+            const com = (Math.floor(Math.random()*3));
+            const player = (Math.floor(Math.random()*3));
+
+            let result = '';
+            if (com === player) {
+                drawCount++;
+                result = '무';
+            } else if ((player - com + 3) % 3 ===1) {
+                winCount++;
+                result = '승';
+            }   else {
+                loseCount++;
+                result = '패';
+            }
+
+            console.log(`Game ${i+1} : com =${rcpArray[com]} / player = ${rcpArray[player]} (${result})`);
+            }
+
+        const playedNoDraw = 10 - drawCount;
+        let rate = 0;
+        if (playedNoDraw > 0) {
+            rate = (winCount / playedNoDraw) * 100;
+        } else {
+            rate = 0;
+        }
+        
+        return {
+            winCount,
+            loseCount,
+            drawCount,
+            rate : rate.toFixed(2)
+        };
+    }
+
+         document.getElementById('btn').addEventListener('click', () => {
+            const res = WinRate();
+            document.getElementById('result').textContent = res.rate;
+            console.log(`총: 승 ${res.winCount}, 패 ${res.loseCount}, 무 ${res.drawCount}, 승률 ${res.rate}%`);
+        });
+        
+
+
+
+        
+
+        console.log(rcpArray);
+    </script>
+</body>
+</html>

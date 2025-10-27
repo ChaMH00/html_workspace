@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            height: 60px;
+            background-color: gray;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 60px;
+            padding-left: 40px;
+            box-sizing: border-box;
+        }
+        /* media query 변경내용 */
+        .main-img{
+            height: 300px;
+            background-image: url(../image/media_back.jpg);
+            background-size: cover;
+            background-position: center;
+            
+        }
+        .discription{
+            height: 300px;
+            background-color: aliceblue;
+            padding-left: 40px;
+            font-size: 15px;
+        }
+        .sub-img{
+            height: 350px;
+            background-image: url(../image/media_back2.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+        .sub-img2{
+            height: 300px;
+            background-image: url(../image/media_back3.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+        .sub-img3{
+            height: 200px;
+            background-image: url(../image/media_back4.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+        @media screen and (min-width: 800px) {
+            .header{
+                height: 60px;
+            }
+            .main-img{
+                height: 300px;
+            }
+            .discription{
+                height: 350px;
+            }
+            .sub-img{
+                height: 500px;
+                width: 50%;
+                float: left;
+            }
+            .sub-img2{
+                height: 250px;
+                width: 50%;
+                float: right;
+            }
+            .sub-img3{
+                height: 250px;
+                width: 50%;
+                float: right;
+            }
+        }
+
+        @media screen and (min-width:1200px) {
+            .main-img{
+                height: 800px;
+                width: 50%;
+                float: left;
+            }
+            .discription{
+                height: 400px;
+                width: 50%;
+                float: right;
+            }
+            .sub-img{
+                height: 400px;
+                width: 25%;
+                float: left;
+            }
+            .sub-img2{
+                height: 200px;
+                width: 25%;
+                float: right;
+            }
+            .sub-img3{
+                height: 200px;
+                width: 25;
+                float: right;
+            }
+        }
+        .sub-img2>a{
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header"><strong>IN'O</strong></div>
+    <div class="main-img"></div>
+    <div class="discription">
+        <p>Portfolio</p>
+        <p><strong>Make Hardware Soft</strong></p>
+        <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also</p>
+    </div>
+    <div class="sub-img"></div>
+    <div class="sub-img2">
+        <a href="">VIEW MORE</a>
+    </div>
+    <div class="sub-img3"></div>
+</body>
+</html>
