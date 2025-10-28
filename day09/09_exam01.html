@@ -15,68 +15,76 @@
         10game의 승률은 <span id="result"></span>%입니다.
     </h3>
 
+    <!-- 콘솔에 어떻게 이기고 졌는지 결과가 나오게 -->
+    <ol id="ol"></ol>
+    <h3 id="h3"></h3>
+
     <script>
         // 가위바위보 게임
         // com = random / player = random 으로 가위 바위 보 내는 방식
         // 0 = 가위, 1 = 바위, 2 = 보
         // 승률게산 ( 승 / (10-무))*100 소루 2자리까지 표현
         // 콘솔에 출력 com / player (승/패/무)
-        const rcpArray = ["가위", "바위", "보"];
         
-        function WinRate() {
-            let winCount = 0;
-            let loseCount = 0;
-            let drawCount = 0;
-        
+        document.getElementById('btn').addEventListener('click', ()=>{
+            let win = 0;
+            let draw = 0;
+            let lose = 0;
+            const play = ['가위', '바위', '보'];
+            let str = '';
 
+            for(let i=0; i<10; i++) {
+                let player = randomNumber();
+                let com = randomNumber();
+                let result = getWinner(player, com);
+                console.log( `player : ${play[player]} / com : ${play[com]} => ${result}`);
+                str += `<li>player : ${play[player]} / com : ${play[com]} => ${result}</li>`;
 
-        for(let i=0; i<10; i++) {
-            const com = (Math.floor(Math.random()*3));
-            const player = (Math.floor(Math.random()*3));
+                if(result == 'win') {
+                    win++;
+                }else if(result == 'draw') {
+                    draw++;
+                }else {
+                    lose++;
+                }
+                /*
+                switch(result) {
+                    case 'win': win++; break;
+                    case 'draw': draw++; break;
+                    case 'lose': lose++; break;
+                }*/
 
-            let result = '';
-            if (com === player) {
-                drawCount++;
-                result = '무';
-            } else if ((player - com + 3) % 3 ===1) {
-                winCount++;
-                result = '승';
-            }   else {
-                loseCount++;
-                result = '패';
             }
+            console.log(`win: ${win} / draw: ${draw} / lose: ${lose}`);
+            document.getElementById("result").innerText =
+            ((win / (10 - draw)) * 100).toFixed(2);
+            document.getElementById("ol").innerHTML = str;
+            document.getElementById("h3").innerText =
+            `win: ${win} / draw: ${draw} / lose: ${lose}`;
+        })
 
-            console.log(`Game ${i+1} : com =${rcpArray[com]} / player = ${rcpArray[player]} (${result})`);
-            }
+        // 데이터 변경 사항 생김.
 
-        const playedNoDraw = 10 - drawCount;
-        let rate = 0;
-        if (playedNoDraw > 0) {
-            rate = (winCount / playedNoDraw) * 100;
-        } else {
-            rate = 0;
+        // 랜덤 값을 리턴하는 함수
+        function randomNumber() {
+            return Math.floor(Math.random() * 3);
         }
-        
-        return {
-            winCount,
-            loseCount,
-            drawCount,
-            rate : rate.toFixed(2)
-        };
-    }
 
-         document.getElementById('btn').addEventListener('click', () => {
-            const res = WinRate();
-            document.getElementById('result').textContent = res.rate;
-            console.log(`총: 승 ${res.winCount}, 패 ${res.loseCount}, 무 ${res.drawCount}, 승률 ${res.rate}%`);
-        });
-        
-
-
-
-        
-
-        console.log(rcpArray);
+        // 승(win) 무(draw) 패(lose) 리턴하는 함수
+        function getWinner(userChoice, comChoice) {
+            if(userChoice === comChoice) {
+                return 'draw';
+            } else if(
+                // 0=가위, 1=바위, 2=보
+                (userChoice == 0 && comChoice == 2) ||
+                (userChoice == 1 && comChoice == 0) ||
+                (userChoice == 2 && comChoice == 1) 
+            ){
+                return 'win';
+            } else {
+                return 'lose';
+            }
+        }
     </script>
 </body>
 </html>
