@@ -28,7 +28,7 @@
 
         - 자바스크립트에서는 JSON 객체를 텍스트로 바꾸고, 다시 object 변경하는
           명령어가 이미 있음.
-          JSON.stringify(object) => string 변경
+          JSON.stringify(object) => string 변경 (전송)
           JSON.parse(string) => object 변경
     -->
     <script>
@@ -91,7 +91,10 @@
             ]
         }
         console.log(top1);
+        let topStriong = JSON.stringify(top1);
         console.log(JSON.stringify(top1));
+        let topObject = JSON.parse(topStriong);
+        console.log(topObject);
         // 환전고시환율
         const exchange = {
             '환전고시환율' : [

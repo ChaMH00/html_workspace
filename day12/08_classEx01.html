@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // class User 생성
+        // 생성자로 name, birth를 받아서 멤버변수로 저장
+        // get age() : 나이를 리턴 오늘날짜연도 - 생년월일연도
+        // status() : 성인인지 미성년자인지 콘솔출력 메서드 생성
+
+        // 2명의 객체를 생성해서
+        // 나이랑 status 출력
+        // ex) name님은 oo살로 성인/미성년자 입니다.
+
+        // class User{
+        //     constructor(name, birthYear) {
+        //         this.name = name;
+        //         this.birthYear = Number(birthYear);
+        //     }
+        //     get age() {
+        //         const thisYear = new Date().getFullYear();
+        //         return thisYear - this.birthYear;
+        //     }
+        //     status() {
+        //         const isAdult = this.age >= 20;
+        //         const state = isAdult ? '성인' : '미성년자';
+        //         console.log(`${this.name}님은 ${this.age}실로 ${state}입니다.`);
+        //         return state;
+        //     }
+        //     // 편의용 출력 문자열
+        //     info() {
+        //         return `${this.name}님은 ${this.age}살로 ${this.status()}입니다.`;
+        //     }
+        // }
+
+        // // 예시 객체 2명 생성 및 출력
+        // const u1 = new User('홍길동', 1995);
+        // const u2 = new User('김철수', 2010);
+
+        // // 콘솔에 출력
+        // u1.status(); // 홍길동님은 OO살로 성인/미성년자 입니다.
+        // u2.status();
+
+        // // 화면에도 간단히 표시
+        // const pre = document.createElement('pre');
+        // pre.innerText = `${u1.name}: ${u1.age}살 (${u1.status()})\n${u2.name}: ${u2.age}살 (${u2.status()})`;
+        // document.body.appendChild(pre);
+        class User{
+            constructor(name, birth) {
+                this.name = name;
+                this.birth = birth;
+            }
+            get age() {
+                // 오늘날짜연도 - 생년월일연도
+                let birthday = new Date(this.birth);
+                let todayYear = new Date().getFullYear();
+                return todayYear - birthday;
+            }
+            status(){
+                if(this.age < 20) {
+                    console.log(`${this.name}(${this.age})은 미성년자 입니다.`)
+                }else{
+                    console.log(`${this.name}(${this.age})은 성인 입니다.`)
+                }
+            }
+        }
+        const hong = new User('hong', '2001-01-04');
+        const kim = new User('kim', '2017-01-01');
+        console.log(hong, kim);
+        hong.status();
+        kim.status();
+
+        
+    </script>
+</body>
+</html>

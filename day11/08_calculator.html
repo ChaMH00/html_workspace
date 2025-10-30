@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --btn-size: 70px;
+            --gap: 10px;
+            --bg: #f4f7fb;
+            --accent: #2b7cff;
+            --muted: #6b7280;
+        }
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background: linear-gradient(180deg,#e9f0ff,#f9fbff);
+            font-family: "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+        }
+        .container{
+            width: calc(var(--btn-size) * 4 + var(--gap) * 3 + 40px);
+            background: #ffffff;
+            padding:20px;
+            border-radius:12px;
+            box-shadow: 0 8px 24px rgba(43,124,255,0.12);
+        }
+        #printResult{
+            margin:0 0 14px 0;
+            height: 64px;
+            background: #0f1724;
+            color: #fff;
+            display:flex;
+            align-items:flex-end;
+            justify-content:flex-end;
+            padding:12px 14px;
+            font-size:28px;
+            border-radius:8px;
+            box-sizing:border-box;
+            overflow:hidden;
+            word-break:break-all;
+        }
+        .area{
+            display:grid;
+            grid-template-columns: repeat(4, var(--btn-size));
+            grid-auto-rows: var(--btn-size);
+            gap: var(--gap);
+            justify-content:center;
+        }
+        .area button{
+            border: none;
+            background: linear-gradient(180deg,#ffffff,#f3f6fb);
+            border-radius:10px;
+            font-size:20px;
+            cursor:pointer;
+            box-shadow: 0 2px 6px rgba(16,24,40,0.06);
+            transition: transform .06s ease, box-shadow .06s ease, background .08s;
+        }
+        .area button:active{ transform: translateY(2px); }
+        .area button:hover{ box-shadow: 0 6px 18px rgba(16,24,40,0.08); }
+        .area button[type="button"][value="."]{ font-size:24px; }
+        .area button[value="+"],
+        .area button[value="-"],
+        .area button[value="*"],
+        .area button[value="/"]{
+            background: linear-gradient(180deg,#eef6ff,#e6f0ff);
+            color: var(--accent);
+            font-weight:600;
+        }
+        .area button[value="="]{
+            background: linear-gradient(180deg,#2b7cff,#1a5fe6);
+            color:#fff;
+            font-weight:700;
+            grid-column: 4 / 5;
+            grid-row: 4 / 6;
+            height: calc(var(--btn-size) * 2 + var(--gap));
+            align-self: stretch;
+            border-radius:10px;
+        }
+        .area button[value="C"]{
+            background: linear-gradient(180deg,#fff4ea,#fff0df);
+            color: #d97706;
+            font-weight:700;
+            grid-column: 1 / 4;
+            grid-row: 5/6;
+            height: var(--btn-size);
+            border-radius:10px;
+        }
+        
+        @media (max-width:420px){
+            :root{ --btn-size: 60px; --gap:8px; }
+            .container{ padding:14px; }
+            #printResult{ height:56px; font-size:22px; padding:10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="printResult"></h1>
+        <div class="area">
+            <button type="button" value="1">1</button>
+            <button type="button" value="2">2</button>
+            <button type="button" value="3">3</button>
+            <button type="button" value="+">+</button>
+
+            <button type="button" value="4">4</button>
+            <button type="button" value="5">5</button>
+            <button type="button" value="6">6</button>
+            <button type="button" value="-">-</button>
+
+            <button type="button" value="7">7</button>
+            <button type="button" value="8">8</button>
+            <button type="button" value="9">9</button>
+            <button type="button" value="*">*</button>
+
+            <button type="button" value=".">.</button>
+            <button type="button" value="0">0</button>
+            <button type="button" value="=">=</button>
+            <button type="button" value="/">/</button>
+
+            <button type="button" value="C">C</button>
+        </div>
+    </div>
+
+    <script>
+        let num1 = "";     // 지금 입력 중인 숫자
+        let num2 = "";    // 이전 숫자(연산자 직전)
+        let operator = "";         // 현재 선택된 연산자
+        const display = document.getElementById('printResult');
+        const area = document.querySelector('.area');
+
+        area.addEventListener('click', (e) => {
+            if(e.target.tagName != 'BUTTON') return;
+            const value = e.target.value;
+
+            if(value == 'C') {
+                num1 = "";
+                num2 = "";
+                operator = "";
+                display.innerText = "";
+                return;
+            }
+
+            if(!isNaN(value) || value == ".") {
+                if(value == "." & num1.includes(".")) return;
+
+                num1 += value;
+                display.innerText = num2 + operator + num1;
+                return;
+            }
+
+            if(["+", "-", "/", "*"].includes(value)){
+                if(num1 == "" && num2 != ""){
+                    operator = value;
+                    display.innerText = num2 + operator;
+                    return;
+                }
+                if(num1 == "") return;
+                num2 = num1;
+                operator = value;
+                num1 = "";
+                display.innerText = num2 + operator;
+                return;
+            }
+
+            if(value == "=") { 
+                if(num2 == "" || num1 == "" || operator == "") return;
+
+                const a = Number(num2);
+                const b = Number(num1);
+                let result = 0;
+
+                switch(operator) {
+                    case "+" : result = a+b; return;
+                    case "-" : result = a-b; return;
+                    case "*" : result = a*b; return;
+                    case "/" : result = b == 0 ? "ERR" : a / b;
+                    break;
+                }
+                
+                if(result != "ERR" && !isNaN(result)) {
+                    result = Number(result.toFixed(2));
+                }
+
+                display.innerText = result;
+                num2 = result.toString();
+                num1 = "";
+                operator = "";
+            }
+        })
+    </script>
+</body>
+</html>

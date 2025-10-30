@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>
+        class : 자바 스크립트에서도 클래스 생성이 가능.
+    </h3>
+    <!--
+        클래스 생성 기본 문법
+        class myClass{
+            // 생성자
+            constructor(param) {
+                ...
+            }
+            // 메서드 정의
+            methodname(param) {
+                ...
+            }
+            methodname(param) {
+                ...
+            }
+            
+            // getter / setter
+            get name() {
+                return this.name;
+            }
+            set name(value) {
+                this.name = value;
+            }   
+        }
+        
+        new myClass(); // 생성자로 생성
+    -->
+    <script>
+        class Car{
+            // class 의 이름은 대문자로 시작 원칙.
+            constructor(name, year) {
+                this.name = name;
+                this.year = year;
+                this.model = '';
+                this.power = false; // true 켜짐상태
+                this.speed = 0;
+            }
+        }
+        const myCar1 = new Car('소나타', 2024);
+        myCar1.model = 'XG';
+        console.log(myCar1);
+
+        const myCar2 = new Car('그랜져', 2025);
+        myCar2.model = 'new';
+        console.log(myCar2);
+
+        const myCar3 = new Car('', );
+        myCar3.name = '아반떼';
+        myCar3.year = 2022;
+        myCar3.model = 'CN7'
+        console.log(myCar3);
+
+    </script>
+</body>
+</html>

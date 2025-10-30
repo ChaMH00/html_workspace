@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        1~99까지의 숫자 중 하나를 랜덤으로 선택하여 해당 숫자를 맞추는 게임
+    -->
+    <div>
+        <button id="random">랜덤 숫자 생성 버튼</button>
+        <button id="re">다시시도</button>
+        <h1 id="printMsg"></h1>
+    </div>
+    <div>
+        <input type="text" id="myNum">
+        <button id="compareNum">제출!</button>
+        <h1 id="result"></h1>
+    </div>
+
+    <script>
+        let secret = null;
+        const guesses = [];
+        const printMsg = document.getElementById('printMsg');
+        const resultEl = document.getElementById('result');
+        const inputEl = document.getElementById('myNum');
+        const randomBtn = document.getElementById('random');
+        const compareBtn = document.getElementById('compareNum');
+
+        randomBtn.addEventListener('click', () => {
+            secret = Math.floor(Math.random() * 99) + 1;
+            guesses.length = 0;
+            printMsg.innerText = '랜덤 숫자가 생성되었습니다. 값을 입력하고 제출하세요.';
+            resultEl.innerText = '';
+            inputEl.value = '';
+            inputEl.disabled = false;
+            compareBtn.disabled = false;
+            randomBtn.disabled = true;
+            console.log('정답(디버그):', secret);
+        });
+
+        compareBtn.addEventListener('click', () => {
+            if (secret === null) {
+                resultEl.innerText = '먼저 랜덤 숫자를 생성하세요.';
+                return;
+            }
+            const raw = inputEl.value.trim();
+              if (raw === '') {
+                resultEl.innerText = '숫자를 입력하세요.';
+                return;
+            }
+            const n = Number(raw);
+            if (!Number.isInteger(n) || n < 1 || n > 99) {
+                resultEl.innerText = '1에서 99 사이의 정수를 입력하세요.';
+                return;
+            }
+            if (guesses.includes(n)) {
+                resultEl.innerText = `이미 시도한 숫자입니다: [${guesses.join(', ')}]`;
+                return;
+            }
+
+            guesses.push(n);
+            if (n === secret) {
+                resultEl.innerText = `정답입니다! 시도횟수: ${guesses.length} / 시도목록: [${guesses.join(', ')}]`;
+                inputEl.disabled = true;
+                compareBtn.disabled = true;
+                randomBtn.disabled = false; 
+                printMsg.innerText = '축하합니다! 다시시도 버튼 또는 랜덤 생성으로 새 게임을 시작하세요.';
+            } else if (n < secret) {
+                resultEl.innerText = `UP ↑ (입력: ${n}) / 시도목록: [${guesses.join(', ')}]`;
+            } else {
+                resultEl.innerText = `DOWN ↓ (입력: ${n}) / 시도목록: [${guesses.join(', ')}]`;
+            }
+
+            inputEl.value = '';
+            inputEl.focus();
+        });
+        document.getElementById('re').addEventListener('click', () => {
+            secret = null;
+            guesses.length = 0;
+            printMsg.innerText = '';
+            resultEl.innerText = '';
+            inputEl.value = '';
+            inputEl.disabled = false;
+            compareBtn.disabled = false;
+            randomBtn.disabled = false;
+        });
+    </script>
+</body>
+</html>

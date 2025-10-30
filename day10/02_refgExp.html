@@ -92,12 +92,24 @@
         // console.log('이미지파일:' + imageFile);
         // console.log('그외파일:' + otherFile);
 
-        // forEach
-
+        
+        // filter
         const imageFiles = fileName.filter(f => f.match(/\.|jpg|gif|png|jpeg$/i));
         const otherFiles = fileName.filter(f => !f.match(/\.|jpg|gif|png|jpeg$/i));
         console.log('이미지파일:' + imageFiles);
         console.log('그외파일:' + otherFiles);
+
+        // reduce => 텍스트 누적
+        const result = fileName.reduce((acc, file)=>{
+            if(file.match(/\.(jpg|gif|png|jpeg)$/i)){
+                acc.image.push(file);
+            }else{
+                acc.other.push(file);
+            }
+            return acc;
+        }, {image:[], other:[]});
+
+        console.log(result);
 
     </script>
 </body>

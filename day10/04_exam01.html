@@ -9,9 +9,9 @@
     <!--
         가위 바위 보 이미지를 버튼태그에 넣어 선택하여 가위바위보의 승률 계산
     -->
-    <button onclick="play(0)"><img src="../image/math_img_1.jpg" alt=""></button>
-    <button onclick="play(1)"><img src="../image/math_img_2.jpg" alt=""></button>
-    <button onclick="play(2)"><img src="../image/math_img_3.jpg" alt=""></button>
+    <button><img src="../image/math_img_1.jpg" alt=""></button>
+    <button><img src="../image/math_img_2.jpg" alt=""></button>
+    <button><img src="../image/math_img_3.jpg" alt=""></button>
     <h1 id="result"></h1>
 
 
@@ -24,6 +24,12 @@
     -->
 
     <script>        
+
+        document.addEventListener('click', (e)=>{
+            // 모든 화면에 이벤트가 담당
+            console.log(e.target.id);
+            play(e.target.id);
+        })
         // 전역변수 결과변수
         const resultCount = {
             win:0,
